@@ -44,7 +44,7 @@ if __name__ == "__main__":
                 if minesweeper_board.get_tile(x, y).is_revealed():
                     print("This tile is already revealed.")
                 else:
-                    if minesweeper_board.get_tile(x, y).reveal(): # If the tile is a mine, raise LoseCondition
+                    if minesweeper_board.reveal_tile(x, y): # If the tile is a mine, raise LoseCondition
                         raise LoseCondition
                     else:
                         revealed += 1
