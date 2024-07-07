@@ -75,6 +75,8 @@ class Tile:
 
     def __repr__(self):
         if self._is_revealed:
+            if self._is_mine:
+                return "[X]"
             return "[" + str(self._num) + "]"
         elif self._is_flagged:
             return "[P]"

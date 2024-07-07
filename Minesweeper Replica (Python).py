@@ -50,6 +50,10 @@ if __name__ == "__main__":
                 raise WinCondition
             
     except WinCondition:
+        minesweeper_board.reveal_all()
+        print(minesweeper_board)
         print("\nYou win!")
     except LoseCondition:
+        minesweeper_board.reveal_all()
+        print(minesweeper_board)
         print("\nYou lost!")
