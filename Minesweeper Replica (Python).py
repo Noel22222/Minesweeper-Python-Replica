@@ -31,7 +31,6 @@ if __name__ == "__main__":
     width = ask_value("width")
     height = ask_value("height")
     minesweeper_board = Board.Board(width, height, width*height // 5)
-    revealed = 0
     try:
         while True:
             print(minesweeper_board)
@@ -46,13 +45,11 @@ if __name__ == "__main__":
                 else:
                     if minesweeper_board.reveal_tile(x, y): # If the tile is a mine, raise LoseCondition
                         raise LoseCondition
-                    else:
-                        revealed += 1
 
-            if (revealed == width*height - width*height // 5):
+            if (minesweeper_board.get_num_revealed() == width*height - width*height // 5):
                 raise WinCondition
             
     except WinCondition:
-        print("You win!")
+        print("\nYou win!")
     except LoseCondition:
-        print("You lost!")
+        print("\nYou lost!")

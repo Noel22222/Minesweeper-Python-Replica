@@ -5,6 +5,7 @@ class Board:
         # Initialization of the board
         self._board = self._fill_array(width, height)
         self._width, self._height = width, height
+        self._revealed = 0
         current_mines = 0
         # Randomly selects tiles to be mines
         while current_mines < num_mines:
@@ -34,10 +35,20 @@ class Board:
                     for potential_y in range(max(y - 1, 0), min(y + 1, self._height - 1) + 1):
                         if not self._board[potential_y][potential_x].is_revealed():
                             self.reveal_tile(potential_x, potential_y)
+            self._revealed += 1
             return False
+
+    def reveal_all(self):
+        for r in range(self._height):
+            for c in range(self._width):
+                if not self._board[r][c].is_revealed():
+                    self._board[r][c]._reveal()
 
     def get_tile(self, x: int, y: int) -> "Tile":
         return self._board[y][x]
+    
+    def get_num_revealed(self) -> int:
+        return self._revealed
 
     def _increment_surrounding(self, x: int, y: int):
         # For each adjacent tile (accounting for edges)
@@ -48,9 +59,9 @@ class Board:
 
     def _fill_array(self, width: int, height: int) -> list:
         empty_board = []
-        for i in range(width):
+        for i in range(height):
             row = []
-            for j in range(height):
+            for j in range(width):
                 row.append(Tile())
             empty_board.append(row)
         return empty_board
